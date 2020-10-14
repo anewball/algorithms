@@ -135,3 +135,29 @@ func TestAddElementAtBeginOfANewList(t *testing.T) {
 
 	list.AddFirst(x)
 }
+
+// This test inserted a value at the end of an empty linkedlist
+func TestAddLastToEmptyList(t *testing.T) {
+	list := New()
+
+	const x = 5
+
+	list.AddLast(x)
+
+	if !list.Find(x) {
+		t.Errorf("The cardinal value %d was not been iserted", x)
+	}
+}
+
+// This test add a new element at the end of a non empty linkedlist
+func TestAddLastToNonEmptyList(t *testing.T) {
+	list := getList()
+
+	const x = 11
+
+	list.AddLast(x)
+
+	if !list.Find(x) {
+		t.Errorf("The cardinal value %d was not been inserted into the linkedlist", x)
+	}
+}

@@ -118,3 +118,15 @@ func print(root *node) {
 		print(root.next)
 	}
 }
+
+// AddLast add an element at the end of the linkedlist
+func (l *List) AddLast(data interface{}) {
+	if l.size > 0 {
+		l.tail.next = &node{data: data}
+	} else {
+		l.tail = &node{data: data}
+		l.head = l.tail
+	}
+
+	l.size++
+}

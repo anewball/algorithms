@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/algorithms/linkedlist"
 )
 
@@ -17,24 +15,5 @@ func main() {
 	list.Add(1)
 	list.Add(0)
 
-	fmt.Printf("Is present: %t\n", list.Find(11))
-
-	fmt.Printf("Size: %d\n", list.Size())
-
 	list.Print()
-
-	fmt.Printf("Removed: %t\n", list.Remove(0))
-	fmt.Printf("Size: %d\n", list.Size())
-
-	list.Print()
-
-	list.AddFirst(7)
-
-	fmt.Printf("Size: %d\n", list.Size())
-
-	list.Remove(7)
-
-	list.Print()
-
-	fmt.Printf("Size: %d\n", list.Size())
 }
