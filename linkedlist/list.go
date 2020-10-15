@@ -130,3 +130,35 @@ func (l *List) AddLast(data interface{}) {
 
 	l.size++
 }
+
+// AddBefore add an element before the existing node
+func (l *List) AddBefore(existingNode, data interface{}) bool {
+	previous := l.head
+	current := l.head
+
+	if l.size > 0 {
+		for current.data != existingNode {
+			if current.next == nil {
+				return false
+			}
+			previous = current
+			current = current.next
+		}
+
+		if current == l.head {
+			temp := &node{data: data}
+			temp.next = l.head
+			l.head = temp
+		} else {
+			temp := &node{data: data}
+			previous.next = temp
+			temp.next = current
+		}
+
+		l.size++
+
+		return true
+	}
+
+	return false
+}

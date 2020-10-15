@@ -15,5 +15,8 @@ func main() {
 	list.Add(1)
 	list.Add(0)
 
+	list.AddBefore(6, 7)
+	list.AddBefore(12, 1.3)
+
 	list.Print()
 }

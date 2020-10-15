@@ -161,3 +161,51 @@ func TestAddLastToNonEmptyList(t *testing.T) {
 		t.Errorf("The cardinal value %d was not been inserted into the linkedlist", x)
 	}
 }
+
+// This test use the AddBefore method to add an element
+// into a linkedlist
+func TestAddElementAtBeginin(t *testing.T) {
+	list := getList()
+
+	const x = 0
+	const value = 1
+
+	if !list.AddBefore(value, x) {
+		t.Errorf("The cardinal value %d is not in the linkedlist", value)
+	}
+}
+
+// This test and an element in between another element
+func TestAddElementBefore(t *testing.T) {
+	list := getList()
+
+	const x = 8
+	const target = 7
+
+	if !list.AddBefore(target, x) {
+		t.Errorf("The cardinal value %d is not in the linkedlist", target)
+	}
+}
+
+// This test try to add a value before a non existing one
+func TestAddBeforeNonExistingElement(t *testing.T) {
+	list := getList()
+
+	const x = 10
+	const target = 9
+
+	if list.AddBefore(target, x) {
+		t.Errorf("The cardinal value %d is in the linkedlist", target)
+	}
+}
+
+func TestAddBeforeAnEmptyList(t *testing.T) {
+	list := New()
+
+	const x = 10
+	const target = 9
+
+	if list.AddBefore(target, x) {
+		t.Errorf("The cardinal value %d is in the linkedlist", target)
+	}
+}
