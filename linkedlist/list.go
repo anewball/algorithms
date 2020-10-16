@@ -162,3 +162,43 @@ func (l *List) AddBefore(existingNode, data interface{}) bool {
 
 	return false
 }
+
+// AddAfter AddAfter add a new node after an existing one
+func (l *List) AddAfter(existingNode, data interface{}) bool {
+	if l.size > 0 {
+		_, current, found := findNode(l, existingNode)
+
+		if found {
+			temp := &node{data: data}
+
+			next := current.next
+			current.next = temp
+			temp.next = next
+
+			if temp.next == nil {
+				l.tail = temp
+			}
+
+			l.size++
+
+			return true
+		}
+	}
+
+	return false
+}
+
+func findNode(l *List, existingNode interface{}) (*node, *node, bool) {
+	previous := l.head
+	current := l.head
+
+	for current.data != existingNode {
+		if current.next == nil {
+			return nil, nil, false
+		}
+		previous = current
+		current = current.next
+	}
+
+	return previous, current, true
+}

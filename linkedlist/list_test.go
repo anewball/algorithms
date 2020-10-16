@@ -199,6 +199,7 @@ func TestAddBeforeNonExistingElement(t *testing.T) {
 	}
 }
 
+// This test try to add a non existing element into an empty linkedlist
 func TestAddBeforeAnEmptyList(t *testing.T) {
 	list := New()
 
@@ -207,5 +208,53 @@ func TestAddBeforeAnEmptyList(t *testing.T) {
 
 	if list.AddBefore(target, x) {
 		t.Errorf("The cardinal value %d is in the linkedlist", target)
+	}
+}
+
+func TestAddAfter(t *testing.T) {
+	list := getList()
+
+	// Testing a non empty list with an existing element.
+	// The AddAfter method should return true
+
+	newNode := 1
+	targetNode := 3
+
+	if !list.AddAfter(targetNode, newNode) {
+		t.Errorf("The cardinal value %d is not in the linkedlist", targetNode)
+	}
+
+	// Testing a non empty list with an existing element. This new node will
+	// be inserted after the existing one, at the end of the linkedlist. It
+	// will become the tail
+
+	newNode = 1
+	targetNode = 7
+
+	if !list.AddAfter(targetNode, newNode) {
+		t.Errorf("The cardinal value %d is not in the linkedlist", targetNode)
+	}
+
+	// Testing a non empty list with a non existing element.
+	// AddAfter should return false since the targetNode is not part of the set
+	// of elements
+
+	newNode = 1
+	targetNode = 8
+
+	if list.AddAfter(targetNode, newNode) {
+		t.Errorf("The cardinal value %d is in the linkedlist", targetNode)
+	}
+
+	// Testing an empty list. Try to insert a new node after one that
+	// is not part of the empty list.
+
+	newNode = 1
+	targetNode = 8
+
+	list = New()
+
+	if list.AddAfter(targetNode, newNode) {
+		t.Errorf("The cardinal value %d is in the linkedlist", targetNode)
 	}
 }
