@@ -21,20 +21,21 @@ func New() *List {
 
 // Add add a new node to the linkedlist
 func (l *List) Add(data interface{}) {
+	temp := &node{data: data}
+
 	if l.size == 0 {
-		l.head = &node{data: data}
-		l.tail = l.head
+		l.head = temp
 	} else {
 		current := l.head
-		for {
-			if current.next == nil {
-				current.next = &node{data: data}
-				l.tail = current.next
-				break
-			}
+		for current.next != nil {
 			current = current.next
 		}
+
+		current.next = temp
 	}
+
+	l.tail = temp
+
 	l.size++
 }
 
@@ -73,30 +74,23 @@ func (l *List) Print() {
 
 // Remove remove an element from the linkedlist
 func (l *List) Remove(data interface{}) bool {
-	previous := l.head
-	current := l.head
-
 	if l.size > 0 {
-		for current.data != data {
-			if current.next == nil {
-				return false
+		previous, current, found := findNode(l, data)
+
+		if found {
+			if current == l.head {
+				l.head = current.next
+			} else {
+				previous.next = current.next
+				if current == l.tail {
+					l.tail = previous
+				}
 			}
-			previous = current
-			current = current.next
+
+			l.size--
+
+			return true
 		}
-
-		if current == l.head {
-			l.head = current.next
-		} else {
-			previous.next = current.next
-			if current == l.tail {
-				l.tail = previous
-			}
-		}
-
-		l.size--
-
-		return true
 	}
 
 	return false
@@ -133,31 +127,23 @@ func (l *List) AddLast(data interface{}) {
 
 // AddBefore add an element before the existing node
 func (l *List) AddBefore(existingNode, data interface{}) bool {
-	previous := l.head
-	current := l.head
-
 	if l.size > 0 {
-		for current.data != existingNode {
-			if current.next == nil {
-				return false
-			}
-			previous = current
-			current = current.next
-		}
+		previous, current, found := findNode(l, existingNode)
 
-		if current == l.head {
+		if found {
 			temp := &node{data: data}
-			temp.next = l.head
-			l.head = temp
-		} else {
-			temp := &node{data: data}
-			previous.next = temp
 			temp.next = current
+
+			if previous == current {
+				l.head = temp
+			} else {
+				previous.next = temp
+			}
+
+			l.size++
+
+			return true
 		}
-
-		l.size++
-
-		return true
 	}
 
 	return false
