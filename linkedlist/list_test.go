@@ -18,196 +18,177 @@ func getList() *List {
 	return list
 }
 
-// This test validated that the number of elements inside the
-// the linkedlist equals 7. Otherwise it will return an error.
-func TestListSizeEqualSeven(t *testing.T) {
+func TestSize(t *testing.T) {
+	// This test validated that the number of elements inside the
+	// the linkedlist equals 7. Otherwise it will return an error.
 	list := getList()
 
-	const n = 7
+	newNode := 7
 
-	if list.Size() != n {
+	if list.Size() != newNode {
 		t.Errorf("The size of the linkedlist is %d.", list.Size())
 	}
 }
 
-// This test removed an element from a linkedlist. If the element
-// was removed, true will be returned otherwise false.
-func TestRemoveAnElementFromList(t *testing.T) {
-	list := getList()
-
-	const element = 4
-
-	if !list.Remove(element) {
-		t.Errorf("The element %d is not part of the list.", element)
-	}
-}
-
-// This test try to remove an element that is not part of the linkedlist.
-func TestRemoveNonExistingElementFromList(t *testing.T) {
-	list := getList()
-
-	const element = 100
-
-	if list.Remove(element) {
-		t.Errorf("The element %d is part of the list.", element)
-	}
-}
-
-// This test removed the last element from a linkedlist.
-// Thereby, the current and the tail should be pointing to the same node.
-func TestRemoveLastElementFromList(t *testing.T) {
-	list := getList()
-
-	const x = 7
-
-	if !list.Remove(x) {
-		t.Errorf("The cardinal value %d is not part of the linkedlist.", x)
-	}
-}
-
-// This test removed the only element inside the linkedlist.
-func TestRemoveOnlyElementFromList(t *testing.T) {
+func TestRemove(t *testing.T) {
+	// This test try to remove an element from a empty linkedlist.
 	list := New()
 
-	const x = 1
+	newNode := 1
 
-	list.Add(x)
-
-	if !list.Remove(x) {
-		t.Errorf("The cardinal value %d is not part of the linkedlist.", x)
+	if list.Remove(newNode) {
+		t.Errorf("The cardinal value %d is part of the list.", newNode)
 	}
-}
 
-// This test try to remove an element from a empty linkedlist.
-func TestTryToRemoveElementFromEmptyList(t *testing.T) {
-	list := New()
+	// This test removed the only element inside the linkedlist.
+	list = New()
 
-	const x = 1
+	newNode = 1
 
-	if list.Remove(x) {
-		t.Errorf("The cardinal value %d is part of the list.", x)
+	list.Add(newNode)
+	if !list.Remove(newNode) {
+		t.Errorf("The cardinal value %d is not part of the linkedlist.", newNode)
+	}
+
+	// This test removed the last element from a linkedlist.
+	// Thereby, the current and the tail should be pointing to the same node.
+	list = getList()
+
+	newNode = 7
+
+	if !list.Remove(newNode) {
+		t.Errorf("The cardinal value %d is not part of the linkedlist.", newNode)
+	}
+
+	// This test try to remove an element that is not part of the linkedlist.
+	list = getList()
+
+	newNode = 100
+
+	if list.Remove(newNode) {
+		t.Errorf("The element %d is part of the list.", newNode)
+	}
+
+	// This test removed an element from a linkedlist. If the element
+	// was removed, true will be returned otherwise false.
+	list = getList()
+
+	newNode = 4
+
+	if !list.Remove(newNode) {
+		t.Errorf("The element %d is not part of the list.", newNode)
 	}
 }
 
 // This test printed all the elements inside a linkedlist
-func TestPrintList(t *testing.T) {
+func TestPrint(t *testing.T) {
 	list := getList()
 
 	list.Print()
 }
 
-// This test searched for an element inside the linkedlist.
-func TestFindElementInList(t *testing.T) {
-	list := getList()
-
-	const x = 5
-
-	if !list.Find(x) {
-		t.Errorf("The value %d is not part of the linkedlist.", x)
-	}
-}
-
-// This test try to find an element inside an empty linkedlist.
-func TestFindElementInEmptyList(t *testing.T) {
+func TestFind(t *testing.T) {
+	// This test try to find an element inside an empty linkedlist.
 	list := New()
 
-	const x = 3
+	newNode := 3
 
-	if list.Find(x) {
-		t.Errorf("The cardinal value %d is part of the linkedlist.", x)
+	if list.Find(newNode) {
+		t.Errorf("The cardinal value %d is part of the linkedlist.", newNode)
+	}
+
+	// This test searched for an element inside the linkedlist.
+	list = getList()
+
+	newNode = 5
+
+	if !list.Find(newNode) {
+		t.Errorf("The value %d is not part of the linkedlist.", newNode)
 	}
 }
 
-// This test added an element at the begin of an existing linkedlist.
-func TestAddElementAtBeginOfExistingList(t *testing.T) {
+func TestAddLast(t *testing.T) {
+	// This test add a new element at the end of a non empty linkedlist
 	list := getList()
 
-	const x = 8
+	newNode := 11
 
-	list.AddFirst(x)
+	list.AddLast(newNode)
+	if !list.Find(newNode) {
+		t.Errorf("The cardinal value %d was not been inserted into the linkedlist", newNode)
+	}
+
+	// This test inserted a value at the end of an empty linkedlist
+	list = New()
+
+	newNode = 5
+
+	list.AddLast(newNode)
+	if !list.Find(newNode) {
+		t.Errorf("The cardinal value %d was not been iserted", newNode)
+	}
+
+	// This test added a value to an empty linkedlist.
+	list = New()
+
+	newNode = 1
+
+	list.AddFirst(newNode)
+	if !list.Find(newNode) {
+		t.Errorf("The cardinal value %d was not been iserted", newNode)
+	}
+
+	// This test added an element at the begin of an existing linkedlist.
+	list = getList()
+
+	newNode = 8
+
+	list.AddFirst(newNode)
+	if !list.Find(newNode) {
+		t.Errorf("The cardinal value %d was not been iserted", newNode)
+	}
 }
 
-// This test added a value to an empty linkedlist.
-func TestAddElementAtBeginOfANewList(t *testing.T) {
+func TestAddBefore(t *testing.T) {
+	// This test try to add a non existing element into an empty linkedlist
 	list := New()
 
-	const x = 1
+	newNode := 10
+	target := 9
 
-	list.AddFirst(x)
-}
-
-// This test inserted a value at the end of an empty linkedlist
-func TestAddLastToEmptyList(t *testing.T) {
-	list := New()
-
-	const x = 5
-
-	list.AddLast(x)
-
-	if !list.Find(x) {
-		t.Errorf("The cardinal value %d was not been iserted", x)
+	if list.AddBefore(target, newNode) {
+		t.Errorf("The cardinal value %d is in the linkedlist", target)
 	}
-}
 
-// This test add a new element at the end of a non empty linkedlist
-func TestAddLastToNonEmptyList(t *testing.T) {
-	list := getList()
+	// This test try to add a value before a non existing one
+	list = getList()
 
-	const x = 11
+	newNode = 10
+	target = 9
 
-	list.AddLast(x)
-
-	if !list.Find(x) {
-		t.Errorf("The cardinal value %d was not been inserted into the linkedlist", x)
+	if list.AddBefore(target, newNode) {
+		t.Errorf("The cardinal value %d is in the linkedlist", target)
 	}
-}
 
-// This test use the AddBefore method to add an element
-// into a linkedlist
-func TestAddElementAtBeginin(t *testing.T) {
-	list := getList()
+	// This test and an element in between another element
+	list = getList()
 
-	const x = 0
-	const value = 1
+	newNode = 8
+	target = 7
 
-	if !list.AddBefore(value, x) {
-		t.Errorf("The cardinal value %d is not in the linkedlist", value)
-	}
-}
-
-// This test and an element in between another element
-func TestAddElementBefore(t *testing.T) {
-	list := getList()
-
-	const x = 8
-	const target = 7
-
-	if !list.AddBefore(target, x) {
+	if !list.AddBefore(target, newNode) {
 		t.Errorf("The cardinal value %d is not in the linkedlist", target)
 	}
-}
 
-// This test try to add a value before a non existing one
-func TestAddBeforeNonExistingElement(t *testing.T) {
-	list := getList()
+	// This test use the AddBefore method to add an element
+	// into a linkedlist
+	list = getList()
 
-	const x = 10
-	const target = 9
+	newNode = 0
+	target = 1
 
-	if list.AddBefore(target, x) {
-		t.Errorf("The cardinal value %d is in the linkedlist", target)
-	}
-}
-
-// This test try to add a non existing element into an empty linkedlist
-func TestAddBeforeAnEmptyList(t *testing.T) {
-	list := New()
-
-	const x = 10
-	const target = 9
-
-	if list.AddBefore(target, x) {
-		t.Errorf("The cardinal value %d is in the linkedlist", target)
+	if !list.AddBefore(target, newNode) {
+		t.Errorf("The cardinal value %d is not in the linkedlist", target)
 	}
 }
 
