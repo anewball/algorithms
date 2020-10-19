@@ -194,6 +194,12 @@ func (l *List) RemoveFirst() bool {
 	if l.size > 0 {
 		l.size--
 		l.head = l.head.next
+
+		if l.head != nil {
+			if l.head.next == nil {
+				l.tail = l.head
+			}
+		}
 		return true
 	}
 

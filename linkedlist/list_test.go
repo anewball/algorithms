@@ -245,6 +245,11 @@ func TestRemoveFirst(t *testing.T) {
 
 	// This test removed the first element
 	list.AddFirst(1)
+	list.AddFirst(2)
+
+	if !list.RemoveFirst() {
+		t.Error("The linkedlist is empty")
+	}
 
 	if !list.RemoveFirst() {
 		t.Error("The linkedlist is empty")
