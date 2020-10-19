@@ -7,10 +7,8 @@ import (
 func main() {
 	list := linkedlist.New()
 
-	list.Add(1)
-	list.Add(3)
-
-	list.AddBefore(3, 2)
+	list.AddFirst(2)
+	list.AddFirst(1)
 
 	list.Print()
 }

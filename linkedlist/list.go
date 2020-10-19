@@ -188,3 +188,14 @@ func findNode(l *List, existingNode interface{}) (*node, *node, bool) {
 
 	return previous, current, true
 }
+
+// RemoveFirst remove the first element at the top of the linkedlist
+func (l *List) RemoveFirst() bool {
+	if l.size > 0 {
+		l.size--
+		l.head = l.head.next
+		return true
+	}
+
+	return false
+}

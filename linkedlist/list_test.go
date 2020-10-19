@@ -239,3 +239,18 @@ func TestAddAfter(t *testing.T) {
 		t.Errorf("The cardinal value %d is in the linkedlist", targetNode)
 	}
 }
+
+func TestRemoveFirst(t *testing.T) {
+	list := New()
+
+	// This test removed the first element
+	list.AddFirst(1)
+
+	if !list.RemoveFirst() {
+		t.Error("The linkedlist is empty")
+	}
+
+	if list.RemoveFirst() {
+		t.Error("The linkedlist is not empty")
+	}
+}
