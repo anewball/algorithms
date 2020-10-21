@@ -190,6 +190,7 @@ func findNode(l *List, existingNode interface{}) (*node, *node, bool) {
 }
 
 // RemoveFirst remove the first element at the top of the linkedlist
+// This operation is O(1)
 func (l *List) RemoveFirst() bool {
 	if l.size > 0 {
 		l.size--
@@ -200,6 +201,33 @@ func (l *List) RemoveFirst() bool {
 				l.tail = l.head
 			}
 		}
+		return true
+	}
+
+	return false
+}
+
+// RemoveLast remove the last element
+func (l *List) RemoveLast() bool {
+	previous := l.head
+	current := l.head
+
+	if l.size > 0 {
+		for current.next != nil {
+			previous = current
+			current = current.next
+		}
+
+		if current == l.head {
+			l.head = nil
+			l.tail = nil
+		} else {
+			l.tail = previous
+			previous.next = nil
+		}
+
+		l.size--
+
 		return true
 	}
 

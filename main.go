@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/algorithms/linkedlist"
 )
 
@@ -11,4 +13,14 @@ func main() {
 	list.AddFirst(1)
 
 	list.Print()
+
+	fmt.Println()
+
+	list.RemoveLast()
+
+	list.Print()
+
+	fmt.Println()
+
+	list.RemoveLast()
 }

@@ -259,3 +259,18 @@ func TestRemoveFirst(t *testing.T) {
 		t.Error("The linkedlist is not empty")
 	}
 }
+
+func TestRemoveLast(t *testing.T) {
+	list := New()
+
+	// Try to remove an element at the end of a list
+	list.RemoveLast()
+
+	list.AddLast(3)
+
+	list.RemoveLast()
+
+	list = getList()
+
+	list.RemoveLast()
+}
